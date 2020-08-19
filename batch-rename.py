@@ -2,17 +2,12 @@ import os
 import datetime
 import shutil
 
-# TODO: for ease of use we'll want to create folders appropriate to the dates
-# that the videos were created on for easy orgranization
-# TODO: for ease of use as a option we'll want to push those folders after being
-# renamed and put into folders
-
-
-# this is the path to the folder where the videos are being held
-now = datetime.datetime.now()
+# enter the username associated with your account
 user_name = 'dmate'
+folder_names = []
 dir = f'C:\\Users\\{user_name}\\Videos\\Captures'
-destination_dir = f'C:\\Users\{user_name}\\Nextcloud\\COD Captures'
+destination_dir = f'C:\\Users\\{user_name}\\Nextcloud\\COD Captures'
+now = datetime.datetime.now()
 
 
 # this function will check the string passed in if each character is an
@@ -27,30 +22,48 @@ def create_new_folder_check(path):
     if not os.path.exists(path):
         os.mkdir(path)
 
-def move_files(path, destination_path):
-    shutil.move(path, destination_path)
+def track_folders_created(folder_name):
+    if not folder_name in folder_names:
+        folder_names.append(folder_name)
+    else:
+        pass
 
-with os.scandir(dir) as dir_entries:
-    for entry in dir_entries:
-        path = entry.path
+def move_files():
+    for folder_name in folder_names:
+        home_path = os.path.join(dir, folder_name)
+        shutil.move(home_path, destination_dir)
+    else:
+        pass
 
-        if not is_ascii(entry.name):
-            encoded_file_name = entry.name.encode('ascii', 'ignore')
-            decoded_file_name = encoded_file_name.decode()
-            file_split = decoded_file_name.split(' ')
-            new_file_name = file_split[5] + ' ' + file_split[6]
-            folder_name = file_split[5].split(f'{now.year}-')[1]
-            folder_path = os.path.join(dir, folder_name)
-            destination_path = os.path.join(dir, folder_name, new_file_name)
+def encode_and_rename_files():
+    with os.scandir(dir) as dir_entries:
+        for entry in dir_entries:
+            path = entry.path
+
+            if not is_ascii(entry.name):
+                encoded_file_name = entry.name.encode('ascii', 'ignore')
+                decoded_file_name = encoded_file_name.decode()
+                file_split = decoded_file_name.split(' ')
+                new_file_name = file_split[5] + ' ' + file_split[6]
+                folder_name = file_split[5].split(f'{now.year}-')[1]
+                folder_path = os.path.join(dir, folder_name)
+                destination_path = os.path.join(dir, folder_name, new_file_name)
 
 
-            create_new_folder_check(folder_path)
+                create_new_folder_check(folder_path)
+                track_folders_created(folder_name)
 
-            try:
-                rename_files(path, destination_path)
-            except Exception as err:
-                print(err)
-        else:
-            pass
-    # only moves the last folder in, its outside the loop so it only does the last one
-    move_files(folder_path, destination_dir)
+                try:
+                    rename_files(path, destination_path)
+                except Exception as err:
+                    print(err)
+            else:
+                pass
+
+def main():
+    encode_and_rename_files()
+    move_files()
+
+
+if __name__ == "__main__":
+    main()
