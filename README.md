@@ -1,3 +1,15 @@
 # batch-rename
 
-small app to batch rename and move video files created by Windows Captures
+Small app to batch rename and move video files created by Windows Captures.
+
+The main use for this app was spawned because of the way Windows Captures and COD: MW generated file names for captures taken, and not being able to be uploaded to a NextCloud server.
+
+There is a unicode character that gets added to the file name, that causes the file name to evaluate to a very long string (passed the character count limits). This apps purpose is to find those unicode encoded files names and rename them appropriately and then save them in unique folders.
+
+Once the file names have been converted and organized into folders, it will then move over into the NextCloud directory to be backed up.
+
+## To run the App
+
+1. open terminal
+2. navigate to this folder/file
+3. type `python batch-rename.py` at the command prompt
