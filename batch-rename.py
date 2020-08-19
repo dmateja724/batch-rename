@@ -9,36 +9,39 @@ import datetime
 
 # this is the path to the folder where the videos are being held
 now = datetime.datetime.now()
-userName = 'dmate'
-dir = f'C:\\Users\\{userName}\\Videos\\Captures'
-currentDate = ''
+user_name = 'dmate'
+dir = f'C:\\Users\\{user_name}\\Videos\\Captures'
+move_dir = ' '
+
 
 # this function will check the string passed in if each character is an
 # ascii character
 def is_ascii(string):
     return all(ord(c) < 128 for c in string)
 
+def rename_files(path, destination_path):
+    os.rename(path, destination_path)
+
+def create_new_folder_check(path):
+    if not os.path.exists(path):
+        os.mkdir(path)
 
 with os.scandir(dir) as dir_entries:
     for entry in dir_entries:
         path = entry.path
 
-
         if not is_ascii(entry.name):
-            encodedFileName = entry.name.encode('ascii', 'ignore')
-            decodedFileName = encodedFileName.decode()
-            fileSplit = decodedFileName.split(' ')
-            newFileName = fileSplit[5] + ' ' + fileSplit[6]
-            folderName = fileSplit[5].split(f'{now.year}-')[1]
-            newPath = os.path.join(dir, newFileName)
+            encoded_file_name = entry.name.encode('ascii', 'ignore')
+            decoded_file_name = encoded_file_name.decode()
+            file_split = decoded_file_name.split(' ')
+            new_file_name = file_split[5] + ' ' + file_split[6]
+            folder_name = file_split[5].split(f'{now.year}-')[1]
+            destination_path = os.path.join(dir, new_file_name)
 
-            if currentDate != folderName
-            # try:
-            #     os.mkdir()
+            create_new_folder_check()
 
-            # this part works, uncomment when ready
             # try:
-            #     os.rename(path, newPath)
+            #    reanmeFiles(path, destinationPath)
             # except Exception as err:
             #     print(err)
 
