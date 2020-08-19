@@ -36,14 +36,16 @@ with os.scandir(dir) as dir_entries:
             file_split = decoded_file_name.split(' ')
             new_file_name = file_split[5] + ' ' + file_split[6]
             folder_name = file_split[5].split(f'{now.year}-')[1]
-            destination_path = os.path.join(dir, new_file_name)
+            folder_path = os.path.join(dir, folder_name)
+            # destination_path = os.path.join(dir, folder_name, new_file_name)
 
-            create_new_folder_check()
 
-            # try:
-            #    reanmeFiles(path, destinationPath)
-            # except Exception as err:
-            #     print(err)
+            create_new_folder_check(folder_path)
+
+            try:
+               rename_files(path, destination_path)
+            except Exception as err:
+                print(err)
 
         else:
             pass
