@@ -16,3 +16,13 @@ Once the file names have been converted and organized into folders, it will then
 4. under `user_name` enter the username you use for windows
    - navigate to C:\Users and use the name of the folder associated with your account
 5. type `python batch-rename.py` at the command prompt
+
+## TODO:
+
+- this is specific to unicode and COD file names and could possibly configure this to work on other types of files if the need arises
+- when moving folders into the final destination
+  - check if folder already exists
+  - if it does then just add the files inside to the
+    already existing one
+- refactor function calls
+- set directories dynamically instead of hardcoded values

@@ -3,12 +3,11 @@ import datetime
 import shutil
 
 # enter the username associated with your account
-user_name = 'dmate'
+user_name = ''
 folder_names = []
 dir = f'C:\\Users\\{user_name}\\Videos\\Captures'
 destination_dir = f'C:\\Users\\{user_name}\\Nextcloud\\COD Captures'
 now = datetime.datetime.now()
-
 
 # this function will check the string passed in if each character is an
 # ascii character
@@ -32,12 +31,11 @@ def move_files():
     for folder_name in folder_names:
         home_path = os.path.join(dir, folder_name)
         shutil.move(home_path, destination_dir)
-    else:
-        pass
 
 def encode_and_rename_files():
     with os.scandir(dir) as dir_entries:
         for entry in dir_entries:
+
             path = entry.path
 
             if not is_ascii(entry.name):
@@ -48,7 +46,6 @@ def encode_and_rename_files():
                 folder_name = file_split[5].split(f'{now.year}-')[1]
                 folder_path = os.path.join(dir, folder_name)
                 destination_path = os.path.join(dir, folder_name, new_file_name)
-
 
                 create_new_folder_check(folder_path)
                 track_folders_created(folder_name)
@@ -63,7 +60,6 @@ def encode_and_rename_files():
 def main():
     encode_and_rename_files()
     move_files()
-
 
 if __name__ == "__main__":
     main()
