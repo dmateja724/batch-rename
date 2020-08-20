@@ -65,7 +65,7 @@ def main():
         print('*******************************************')
     else:
         encode_and_rename_files()
-        # move_files()
+        move_files()
 
 if __name__ == "__main__":
     main()
