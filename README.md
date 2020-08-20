@@ -12,4 +12,7 @@ Once the file names have been converted and organized into folders, it will then
 
 1. open terminal
 2. navigate to this folder/file
-3. type `python batch-rename.py` at the command prompt
+3. open `batch-rename.py`
+4. under `user_name` enter the username you use for windows
+   - navigate to C:\Users and use the name of the folder associated with your account
+5. type `python batch-rename.py` at the command prompt
