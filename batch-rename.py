@@ -58,8 +58,14 @@ def encode_and_rename_files():
                 pass
 
 def main():
-    encode_and_rename_files()
-    move_files()
+    if user_name == '':
+        print('*******************************************')
+        print('****** Please fill in the user_name  ******')
+        print('******    at the top of this file    ******')
+        print('*******************************************')
+    else:
+        encode_and_rename_files()
+        # move_files()
 
 if __name__ == "__main__":
     main()
